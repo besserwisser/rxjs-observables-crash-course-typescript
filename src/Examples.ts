@@ -1,7 +1,21 @@
 import * as $ from 'jquery';
 import {Observable} from 'rxjs/Rx';
 
-export class Examples_Operators {
+interface ReturnValuesGithub {
+    data: {
+        name: string,
+        blog: string,
+        public_repos: string
+    }
+}
+
+interface Users {
+    name: string,
+    age: number
+}
+
+export class Examples_Merge {
+
 
     constructor(){
 
@@ -11,13 +25,112 @@ export class Examples_Operators {
 
     }
 
+
+
+}
+
+export class Examples_MapPlug {
+
+    intervalSource$: Observable<number>;
+    arrSource$: Observable<string>;
+    users: Array<Users>;
+    userStream$: Observable<Users>;
+
+    constructor(){
+        this.intervalSource$ = Observable.interval(1000)
+            .take(10)
+            .map(v => v * v);
+        this.arrSource$ = Observable.from(["Oli", "Ole", "Sascha"])
+            .map(v => v.toUpperCase())
+            .map(v => "I am " + v);
+        this.users = [
+            { name: "Will", age: 34 },
+            { name: "Tobi", age: 21 },
+            { name: "Rafael", age: 54 }
+        ];
+        this.userStream$ = Observable.from(this.users)
+            .pluck("name");
+    }
+
+    init(){
+        this.intervalSource$.subscribe(v => {
+            $("#mapinterval").html(v);
+        })
+
+        this.arrSource$.subscribe(v => {
+            $("#arr").append(v + "<br />");
+        })
+
+        Observable.fromPromise(this.getUser("bradtraversy"))
+            .map( (user: ReturnValuesGithub) => user.data.name)
+            .subscribe(name => {
+                $("#mapuser").html(name);
+            }
+        );
+
+        this.userStream$
+        
+            .subscribe(v => {
+                $("#mapuserArray").append(v + "<br />");
+            });
+    }
+
+    getUser(username){
+        return $.ajax({
+            url: "https://api.github.com/users/" + username,
+            dataType: "jsonp"
+        }).promise();
+    }
+
+}
+
+export class Examples_Operators {
+
+    source$: Observable<number>;
+    timer$: Observable<number>;
+    range$: Observable<number>;
+
+    constructor(){
+        this.source$ = Observable.interval(100)
+            .take(6);
+        this.timer$ = Observable.timer(1000, 1000)
+            .take(3);
+        this.range$ = Observable.range(25, 100);
+    }
+
+    init(){
+        this.source$.subscribe( 
+            v => {
+                $("#interval").html(v);
+            },
+            err => console.log(err),
+            () => $("#interval").append("<br />Complete")
+        )
+
+        this.timer$.subscribe( 
+            v => {
+                $("#timer").html(v);
+            },
+            err => console.log(err),
+            () => $("#timer").append("<br />Complete")
+        )
+       
+        this.range$.subscribe( 
+            v => {
+                $("#range").html(v);
+            },
+            err => console.log(err),
+            () => $("#range").append("<br />Complete")
+        )
+    }
+
 }
 
 export class Examples_Promise {
 
     myPromise: Promise<string>;
     source$: Observable<string>;
-    userStream$: Observable<any>;
+    userStream$: Observable<ReturnValuesGithub>;
     userinputStream$: Observable<string>;
 
     constructor(){
@@ -43,7 +156,7 @@ export class Examples_Promise {
         )
 
         this.userStream$
-            .subscribe(v => {
+            .subscribe( (v: ReturnValuesGithub) => {
                 $("#name").html(v.data.name);
                 $("#blog").html(v.data.blog);
                 $("#repos").html(v.data.public_repos);
@@ -63,7 +176,7 @@ export class Examples_Promise {
         //             $("#name").html(v.data.name);
         //             $("#blog").html(v.data.blog);
         //             $("#repos").html(v.data.public_repos);
-        //         })
+        //         }) 
         // });
 
     }
@@ -73,14 +186,6 @@ export class Examples_Promise {
             url: "https://api.github.com/users/" + username,
             dataType: "jsonp"
         }).promise();
-    }
-}
-
-interface ReturnValuesGithub {
-    data: {
-        name: string,
-        blog: string,
-        public_repos: string
     }
 }
 
@@ -186,7 +291,7 @@ export class Examples_UI {
         this.btnStream$.subscribe(
             (e) => console.log(e),
             (err) => console.log(err),
-            () => console.log('completed')    
+            () => console.log('completed ')    
         );
 
         this.inputStream$.subscribe(
@@ -206,7 +311,7 @@ export class Examples_UI {
                 let x: number = e.clientX;
                 let y: number = e.clientY;
                 if(x && y) {
-                    this.output.html('x: ' + String(x) + ' y: ' + String(y));
+                    this.output.html('X: ' + String(x) + ' Y: ' + String(y));
                 }
             },
             (err) => console.log(err),

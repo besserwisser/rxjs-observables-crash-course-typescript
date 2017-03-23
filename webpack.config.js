@@ -4,8 +4,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: "./src/main.ts",
     output: {
-        path: __dirname + "/dist",
-        filename: "bundle.js",
+        filename: "./dist/bundle.js",
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -27,7 +26,7 @@ module.exports = {
      plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new CopyWebpackPlugin([
-            { from: "./index.html"}
+            { from: "./index.html", to: "./dist/index.html"}
         ])
     ]
 

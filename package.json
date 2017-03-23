@@ -2,7 +2,7 @@
   "name": "rxjs-observables-crash-course-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "main.ts",
+  "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server --env development --port 8081",
     "build": "webpack --env production"
@@ -12,6 +12,8 @@
   "devDependencies": {
     "awesome-typescript-loader": "^3.1.2",
     "copy-webpack-plugin": "^4.0.1",
+    "jquery": "^3.2.1",
+    "rxjs": "^5.2.0",
     "source-map-loader": "^0.2.0",
     "typescript": "^2.1.6",
     "webpack-dev-server": "^2.3.0"

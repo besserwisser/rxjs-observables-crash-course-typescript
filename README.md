@@ -6,16 +6,16 @@ Note:
 - I did cover the mergeMap function for the Promise Example
 
 ## Installation
-Webpack needs to be installed:
-`npm install -g webpack`
-Also some further dependencies: 
+Webpack needs to be installed:  <br />
+`npm install -g webpack` <br />
+Also some further dependencies: <br />
 `npm install`
 
 ## Usage
-Run 
-`npm run start` 
-for liveserver reload and 
-`npm run build`
+Run <br />
+`npm run start` <br />
+for liveserver reload and <br />
+`npm run build` <br />
 for building the files to the dist folder
 
 ## Contribution

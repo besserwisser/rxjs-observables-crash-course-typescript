@@ -3,7 +3,9 @@ import {Examples_UI,
         Examples_Arrays, 
         Examples_Scratch,
         Examples_Promise,
-        Examples_Operators} from './Examples';
+        Examples_Operators,
+        Examples_MapPlug,
+        Examples_Merge} from './Examples';
 
 $(document).ready(function(){ 
     const examples_UI: Examples_UI = new Examples_UI();
@@ -20,5 +22,11 @@ $(document).ready(function(){
 
     const examples_Operators: Examples_Operators = new Examples_Operators();
     examples_Operators.init();
+
+    const examples_MapPlug: Examples_MapPlug = new Examples_MapPlug();
+    examples_MapPlug.init();
+
+    const examples_Merge: Examples_Merge = new Examples_Merge();
+    examples_Merge.init();
 });
 
