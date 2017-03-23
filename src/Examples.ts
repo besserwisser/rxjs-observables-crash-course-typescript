@@ -16,13 +16,34 @@ interface Users {
 
 export class Examples_Merge {
 
+    source1$: Observable<string>;
+    source2$: Observable<string>;
+    concat1$: Observable<string>;
+    concat2$: Observable<string>;
 
     constructor(){
-
+        this.source1$ = Observable.interval(2000).map(v => "First: " + v);
+        this.source2$ = Observable.interval(500).map(v => "Second: " + v);
+        this.concat1$ = Observable.range(0,5).map(v => "First: " + v);
+        this.concat2$ = Observable.range(0,3).map(v => "Second: " + v);
     }
 
     init(){
+        Observable.of("Hello")
+            .merge(Observable.of("Everyone"))
+            .subscribe( x => $("#merge").append(x));
 
+        Observable.interval(2000)
+            .merge(Observable.interval(500))
+            .take(5)
+            .subscribe( x => $("#mergeInterval").append(x));
+        
+        Observable.merge(this.source1$, this.source2$)
+            .take(10)
+            .subscribe(v => $("#mergeIntervalOperator").append(v + "<br/>"))
+
+        Observable.concat(this.concat1$, this.concat2$)
+            .subscribe(v => $("#concat").append(v + "<br/>"))
     }
 
 

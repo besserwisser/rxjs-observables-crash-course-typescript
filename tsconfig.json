@@ -2,7 +2,8 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "allowJs": true
+        "allowJs": true,
+        "sourceMap": true
     },
     "awesomeTypescriptLoaderOptions": {
        "strictNullChecks": true
