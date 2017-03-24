@@ -14,6 +14,56 @@ interface Users {
     age: number
 }
 
+export class Examples_MergeMap {
+
+    userinputStream$: Observable<string>;
+
+    constructor(){
+        this.userinputStream$ = Observable.fromEvent($("#smuserinput"), "keyup")
+            .map((i: Event) => (<HTMLInputElement>i.target).value);
+    }
+
+    init(){
+
+        /* 
+            As far as I understand it: mergeMap will always emit all combinations of the 
+            values from the first and second Observable. The switchMap will stop emitting
+            the old values as soon as a new value combination emerges.
+        */
+
+       Observable.of("Hello")
+            .mergeMap( v => {
+                return Observable.of(v + " Everyone");
+            })
+            .subscribe(
+                x => $("#mergemap").append(x + "<br/>"),
+                err => console.log("Error"),
+                () => $("#mergemap").append("Completed Mergemap!")            
+            );
+
+
+        this.userinputStream$
+            .switchMap( username => Observable.fromPromise(this.getUser(username)) )
+            .subscribe( 
+                (v: ReturnValuesGithub) => {
+                    $("#smname").html(v.data.name);
+                    $("#smblog").html(v.data.blog);
+                    $("#smrepos").html(v.data.public_repos);
+                },
+                err => console.log("Error"),
+                () => $("#switchmap").append("Completed Switchmap!")   
+            )      
+    }
+
+    getUser(username){
+        return $.ajax({
+            url: "https://api.github.com/users/" + username,
+            dataType: "jsonp"
+        }).promise();
+    }
+
+}
+
 export class Examples_Merge {
 
     source1$: Observable<string>;
@@ -45,8 +95,6 @@ export class Examples_Merge {
         Observable.concat(this.concat1$, this.concat2$)
             .subscribe(v => $("#concat").append(v + "<br/>"))
     }
-
-
 
 }
 

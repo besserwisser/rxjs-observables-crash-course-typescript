@@ -5,7 +5,8 @@ import {Examples_UI,
         Examples_Promise,
         Examples_Operators,
         Examples_MapPlug,
-        Examples_Merge} from './Examples';
+        Examples_Merge, 
+        Examples_MergeMap} from './Examples';
 
 $(document).ready(function(){ 
     const examples_UI: Examples_UI = new Examples_UI();
@@ -28,5 +29,8 @@ $(document).ready(function(){
 
     const examples_Merge: Examples_Merge = new Examples_Merge();
     examples_Merge.init();
+
+    const examples_MergeMap: Examples_MergeMap = new Examples_MergeMap();
+    examples_MergeMap.init();
 });
 

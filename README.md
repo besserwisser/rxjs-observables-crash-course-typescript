@@ -3,7 +3,8 @@ This Observable Tutorial done with TypeScript: https://www.youtube.com/watch?v=e
 
 Note: 
 - I did not cover the JS Objects "Map" and "Set". 
-- I did cover the mergeMap function for the Promise Example
+- I did also cover the mergeMap function for the Promise Example
+- I did not succeed to get the sourcemap loader working with Webpack (Help is much appreciated!)
 
 ## Installation
 Webpack needs to be installed:  <br />
