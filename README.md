@@ -7,9 +7,7 @@ Note:
 - I did not succeed to get the sourcemap loader working with Webpack (Help is much appreciated!)
 
 ## Installation
-Webpack needs to be installed:  <br />
-`npm install -g webpack` <br />
-Also some further dependencies: <br />
+Install dependencies: <br />
 `npm install`
 
 ## Usage
