@@ -13,7 +13,7 @@ Install dependencies: <br />
 ## Usage
 Run <br />
 `npm run start` <br />
-for liveserver reload and <br />
+for liveserver reload (http://localhost:8081/) and <br />
 `npm run build` <br />
 for building the files to the dist folder
 
